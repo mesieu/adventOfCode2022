@@ -20,8 +20,7 @@ let getCaloriesPerElves = (calories) => {
 };
 
 let part_1 = () => {
-  let caloriesPerElves = getCaloriesPerElves(calories);
-  return Math.max(...caloriesPerElves);
+  return Math.max(...getCaloriesPerElves(calories));
 };
 
 let part_2 = () => {
