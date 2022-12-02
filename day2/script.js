@@ -1,11 +1,6 @@
 const { readFileSync } = require("fs");
 
-inputFile = readFileSync(
-  "C:/Users/guill/Documents/code/adventOfCode2022/day2/input.txt",
-  "utf-8"
-);
-
-grid = inputFile.split("\r\n");
+strategyGuide = (readFileSync("./day2/input.txt","utf-8")).split("\r\n");
 
 let opponentMove = {
   "A": "Rock",
@@ -20,7 +15,7 @@ let responseMove = {
 
 let part_1 = () => {
   let totalPoints = 0;
-  grid.forEach((round) => {
+  strategyGuide.forEach((round) => {
     round = round.split(' ');
     switch (responseMove[round[1]]) {
       case "Rock":
@@ -45,7 +40,7 @@ let part_1 = () => {
 
 let part_2 = () => {
   let totalPoints = 0;
-  grid.forEach((round) => {
+  strategyGuide.forEach((round) => {
     round = round.split(' ');
     switch (opponentMove[round[0]]) {
       case "Rock":
