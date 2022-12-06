@@ -1,18 +1,17 @@
 const { readFileSync } = require('fs');
 
-const input = readFileSync('./day5/input.txt', 'utf-8').split('\r\n');
+const input = readFileSync('./day5/input.txt', 'utf-8').split('\n');
 
 const day5 = () => {
   let startingStacks = getStartingStacksMatrix(input);
   let rearrangementProcs = getRearrangementProcsMatrix(input);
-
-  rearrangementProcs.forEach((proc) => {
-    console.log(proc);
-  });
+  // let newStacks = runRearrangementProcs(rearrangementProcs, startingStacks);
 
   return { startingStacks, rearrangementProcs };
+  // return { startingStacks, rearrangementProcs, newStacks };
 };
 
+// Helper Functions
 const getFirstStack = (row) => {
   return row.slice(0, 3);
 };
@@ -47,7 +46,23 @@ const getRearrangementProcsMatrix = (input) => {
   rearrangementProcString.forEach((proc) => {
     rearrangementProcs.push(proc.match(isNumber));
   });
-  return rearrangementProcs;
+  return rearrangementProcs.map((proc) => proc.map((procNumber) => Number(procNumber)));
+};
+
+const runRearrangementProcs = (procs, stacks) => {
+  let newStacks = stacks.map((stack) => stack);
+  let crateQtyToMove, crates, fromStack, toStack;
+  procs.forEach((proc) => {
+    crateQtyToMove = proc[0];
+    fromStack = proc[1];
+    toStack = proc[2];
+
+    newStacks[toStack - 1].push(
+      stacks[fromStack - 1].slice(stacks.length - crateQtyToMove, stacks.length).reverse()[0]
+    );
+  });
+
+  return newStacks;
 };
 
 module.exports = day5;
