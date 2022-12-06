@@ -6,6 +6,10 @@ const day5 = () => {
   let startingStacks = getStartingStacksMatrix(input);
   let rearrangementProcs = getRearrangementProcsMatrix(input);
 
+  rearrangementProcs.forEach((proc) => {
+    console.log(proc);
+  });
+
   return { startingStacks, rearrangementProcs };
 };
 
@@ -43,6 +47,7 @@ const getRearrangementProcsMatrix = (input) => {
   rearrangementProcString.forEach((proc) => {
     rearrangementProcs.push(proc.match(isNumber));
   });
+  return rearrangementProcs;
 };
 
 module.exports = day5;
