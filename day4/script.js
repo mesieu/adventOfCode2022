@@ -1,22 +1,17 @@
 const { readFileSync } = require('fs');
 
-assignmentPairs = readFileSync('./day4/input.txt', 'utf-8')
+let assignmentPairs = readFileSync('./day4/input.txt', 'utf-8')
   .split('\r\n')
   .map((row) => row.split(',').map((pair) => pair.split('-').map((number) => Number(number))));
 
-console.log(assignmentPairs);
 let containedAssignments = 0;
 let overlappingAssignments = 0;
 function day4() {
   assignmentPairs.forEach((assignmentPair) => {
     firstAssignment = assignmentPair[0];
     secondAssignment = assignmentPair[1];
-    containedAssignments = assignmentIsContained(firstAssignment, secondAssignment)
-      ? (containedAssignments += 1)
-      : containedAssignments;
-    overlappingAssignments = assignmentIsOverlapping(firstAssignment, secondAssignment)
-      ? (overlappingAssignments += 1)
-      : overlappingAssignments;
+    if (assignmentIsContained(firstAssignment, secondAssignment)) containedAssignments += 1;
+    if (assignmentIsOverlapping(firstAssignment, secondAssignment)) overlappingAssignments += 1;
   });
   return {
     part1Result: containedAssignments,
